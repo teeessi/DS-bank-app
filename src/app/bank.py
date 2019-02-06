@@ -11,7 +11,7 @@ class Bank:
     def open_account(self, account):
         assert account['number'] not in self._get_account_numbers(), \
             'Account number ' + str(account['number']) + ' already taken!'
-        account['balance'] = 0
+        account['balance'] = 0.
         self.accounts.append(account)
         return account
 
@@ -19,12 +19,6 @@ class Bank:
         assert amount > 0, 'Amount has to be greater than 0'
 
         # check account existence
-        # if we can rely on account numbers, the following would be sufficient...
-        _account_numbers = self._get_account_numbers()
-        # assert sender['number'] in _account_numbers, 'Sender has no account yet!'
-        # assert recipient['number'] in _account_numbers, 'Recipient has no account yet!'
-
-        # ...but we want to make sure all data matches
         assert sender in self.accounts, 'Sender has no account yet!'
         assert recipient in self.accounts, 'Recipient has no account yet!'
 
@@ -36,6 +30,9 @@ class Bank:
         }
         self.transactions.append(_transaction)
 
-        # self.accounts[_account_numbers.index(sender('number'))]['balance'] = ...and so on...
+        # _account_numbers = self._get_account_numbers()
+        # _sender_account_index = self.accounts[_account_numbers.index(sender('number'))]
+        # _recipient_account_index = self.accounts[_account_numbers.index(recipient('number'))]
+        # self.accounts[_sender_account_index]('balance') = 0
 
         return _transaction
