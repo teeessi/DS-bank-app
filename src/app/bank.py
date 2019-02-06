@@ -1,5 +1,4 @@
-from .account import Account
-from .transaction import Transaction
+import app
 
 class Bank:
     def __init__(self, name):
@@ -8,7 +7,7 @@ class Bank:
         self.transactions = []
 
     def open_account(self, account):
-        assert isinstance(account, Account), 'Account should be an app.Account'
+        assert isinstance(account, app.Account), 'Account should be an app.Account'
         assert account.number not in self.accounts, 'Account number {} already taken!'.format(account.number)
         self.accounts[account.number] = account
         return account
@@ -23,7 +22,7 @@ class Bank:
 
         self.accounts[sender.number].subtract_from_balance(amount)
         self.accounts[recipient.number].add_to_balance(amount)
-        transaction = Transaction(
+        transaction = app.Transaction(
             sender = sender.number,
             recipient = recipient.number,
             subject = subject,
