@@ -1,10 +1,11 @@
-import app
+import utils
 
 
 class Account:
     def __init__(self, *, firstname, lastname, number, balance=0.):
         assert isinstance(number, int), 'Number needs to be an integer'
         assert isinstance(balance, float), 'Balance needs to be a float'
+        self.bank = None
         self.firstname = firstname
         self.lastname = lastname
         self.number = number
@@ -26,10 +27,14 @@ class Account:
         return self.balance >= amount
 
     def add_to_balance(self, amount):
-        assert app.is_positive(amount), 'Amount needs to be greater than 0'
+        assert utils.is_positive(amount), 'Amount needs to be greater than 0'
         self.balance += amount
 
     def subtract_from_balance(self, amount):
-        assert app.is_positive(amount), 'Amount needs to be greater than 0'
+        assert utils.is_positive(amount), 'Amount needs to be greater than 0'
         assert self.has_funds_for(amount), 'Account has not enough funds'
         self.balance -= amount
+
+    def collect_transactions(self):
+        pass
+        # retrieve list of transactions belonging to the current account
