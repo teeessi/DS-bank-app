@@ -13,13 +13,19 @@ class Bank:
         self.accounts[account.number] = account
         return account
 
+    def _account_number_exists(self, account_number):
+        return account_number in self.accounts
+
+    def _account_matches(self, account):
+        return self.accounts[account.number] == account
+
     def add_transaction(self, *, sender, recipient, subject, amount):
         # check if sender/recipient account number exists
-        assert sender.number in self.accounts, 'Sender has no account yet!'
-        assert recipient.number in self.accounts, 'Recipient has no account yet!'
-        # check if sender/recipient account number matches with sender/recipient
-        assert self.accounts[sender.number] == sender, 'Sender account does not match!'
-        assert self.accounts[recipient.number] == recipient, 'Recipient account does not match!'
+        assert self._account_number_exists(sender.number), 'Sender has no account yet!'
+        assert self._account_number_exists(recipient.number), 'Recipient has no account yet!'
+        # check if sender/recipient account number matches with sender/recipient account
+        assert self._account_matches(sender), 'Sender account does not match!'
+        assert self._account_matches(recipient), 'Recipient account does not match!'
 
         self.accounts[sender.number].subtract_from_balance(amount)
         self.accounts[recipient.number].add_to_balance(amount)
