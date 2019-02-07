@@ -12,9 +12,10 @@ class Transaction:
     def info(self):
         # return formatted transaction info
         # 'From 1 to 2: Test transaction - 10.0 €'
-        return 'From {} to {}: {} - {} €'.format(
-            self.sender,
-            self.recipient,
-            self.subject,
-            self.amount,
+        template = 'From {sender} to {recipient}: {subject} - {amount} €'
+        return template.format(
+            sender=self.sender,
+            recipient=self.recipient,
+            subject=self.subject,
+            amount=self.amount,
         )

@@ -23,9 +23,9 @@ class Bank:
         self.accounts[sender.number].subtract_from_balance(amount)
         self.accounts[recipient.number].add_to_balance(amount)
         transaction = app.Transaction(
-            sender = sender.number,
-            recipient = recipient.number,
-            subject = subject,
-            amount = amount)
+            sender=sender.number,
+            recipient=recipient.number,
+            subject=subject,
+            amount=amount)
         self.transactions.append(transaction)
         return transaction
